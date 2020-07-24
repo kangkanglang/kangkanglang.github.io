@@ -61,6 +61,7 @@ Java和C#都是使用根搜索算法来判断对象是否存活。通过一系�
 # 3. Java内存模型
 
 内存模型如下图所示：
+
 ![Java内存模型](https://gitee.com/yuanlu_k/BlogImages/raw/master/Java-GC%E5%B0%8F%E7%BB%93/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.png)
 
 ## 3.1. 堆
@@ -151,4 +152,4 @@ Java和C#都是使用根搜索算法来判断对象是否存活。通过一系�
 
 与Parallel Scaven类似，但它可以与CMS配合使用。
 
-![ParNew模型](https://gitee.com/yuanlu_k/BlogImages/raw/master/Java-GC%E5%B0%8F%E7%BB%93/ParNew.png)
+![ParNew模型](http://gitee.com/yuanlu_k/BlogImages/raw/master/Java-GC%E5%B0%8F%E7%BB%93/ParNew.png)
