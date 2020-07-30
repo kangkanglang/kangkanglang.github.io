@@ -17,7 +17,7 @@ MyISAM和InnoDB是MySQL最常用的两个存储引擎，本文将进行详尽的
 
 ## 1. MyISAM与InnoDB的索引差异
 
-在(MySQL 索引 B-/+树)[https://kangkanglang.github.io/2020/07/30/MySQL%E7%B4%A2%E5%BC%95B+%E6%A0%91/] 中介绍了B+树，它是一种非常适合用来做数据库索引的数据结构：
+在[MySQL 索引 B-/+树](https://kangkanglang.github.io/2020/07/30/MySQL%E7%B4%A2%E5%BC%95B+%E6%A0%91) 中介绍了B+树，它是一种非常适合用来做数据库索引的数据结构：
 
 > (1)很适合磁盘存储，能够充分利用局部性原理，磁盘预读；
 > (2)很低的树高度，能够存储大量数据；
@@ -49,7 +49,7 @@ MyISAM的***索引***与***行记录***是分开存储的，叫做***非聚集�
 
 则MyISAM构建的B+树如下图所示：
 
-!(MyISAM)[https://gitee.com/yuanlu_k/BlogImages/raw/master/MySQL%E7%B4%A2%E5%BC%95/MyISAM.png]
+![MyISAM](https://gitee.com/yuanlu_k/BlogImages/raw/master/MySQL%E7%B4%A2%E5%BC%95/MyISAM.png)
 
 上图可知：
 > 行记录单独存储
@@ -79,7 +79,7 @@ InnoDB的普通索引可以有多个，它与聚集索引是不同的：
 
 再InnoDB下，t_user表构成的B+树如下图所示：
 
-!(InnoDB)[https://gitee.com/yuanlu_k/BlogImages/raw/master/MySQL%E7%B4%A2%E5%BC%95/InnoDB.png]
+![InnoDB](https://gitee.com/yuanlu_k/BlogImages/raw/master/MySQL%E7%B4%A2%E5%BC%95/InnoDB.png)
 
 
 ### 1.3. Innodb与MyISAM的区别
