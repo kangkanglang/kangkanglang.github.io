@@ -17,7 +17,7 @@ MyISAM和InnoDB是MySQL最常用的两个存储引擎，本文将进行详尽的
 
 ## 1. MyISAM与InnoDB的索引差异
 
-在(MySQL 索引（一）B-/+树)[https://kangkanglang.github.io/2020/07/30/MySQL%E7%B4%A2%E5%BC%95B+%E6%A0%91/] 中介绍了B+树，它是一种非常适合用来做数据库索引的数据结构：
+在(MySQL 索引 B-/+树)[https://kangkanglang.github.io/2020/07/30/MySQL%E7%B4%A2%E5%BC%95B+%E6%A0%91/] 中介绍了B+树，它是一种非常适合用来做数据库索引的数据结构：
 
 > (1)很适合磁盘存储，能够充分利用局部性原理，磁盘预读；
 > (2)很低的树高度，能够存储大量数据；
