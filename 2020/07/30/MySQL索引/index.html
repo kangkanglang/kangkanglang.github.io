@@ -162,7 +162,7 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-30 03:34" pubdate>
+    <time datetime="2020-07-30 03:39" pubdate>
       2020年7月30日 凌晨
     </time>
   </div>
@@ -236,7 +236,41 @@
 <p>tips：MyISAM的表可以没有主键。</p>
 </blockquote>
 <p>主键索引与普通索引是两棵独立的索引B+树，通过索引列查找时，先定位到B+树的叶子节点，再通过指针定位到行记录。</p>
-<p>例如：在MyISAM引擎下有一表t_user(id, name, sex, flag)<br>表中有4条记录（id为主键，name为普通索引）<br>|  id   | name  | sex  | flag  |<br>|  —-  | —-  | —-  | —-  |<br>| 1  | sj | m | A |<br>| 3  | zs | m | A |<br>| 5  | ls | m | A |<br>| 9  | ww | f | B |</p>
+<p>例如：在MyISAM引擎下有一表t_user(id, name, sex, flag)<br>表中有4条记录（id为主键，name为普通索引）</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>sex</th>
+<th>flag</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>sj</td>
+<td>m</td>
+<td>A</td>
+</tr>
+<tr>
+<td>3</td>
+<td>zs</td>
+<td>m</td>
+<td>A</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ls</td>
+<td>m</td>
+<td>A</td>
+</tr>
+<tr>
+<td>9</td>
+<td>ww</td>
+<td>f</td>
+<td>B</td>
+</tr>
+</tbody></table>
 <p>则MyISAM构建的B+树如下图所示：</p>
 <p><img src="https://gitee.com/yuanlu_k/BlogImages/raw/master/MySQL%E7%B4%A2%E5%BC%95/MyISAM.png" srcset="/img/loading.gif" alt="MyISAM"></p>
 <p>上图可知：</p>
