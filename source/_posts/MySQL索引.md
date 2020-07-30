@@ -47,14 +47,12 @@ MyISAM的***索引***与***行记录***是分开存储的，叫做***非聚集�
 表中有4条记录（id为主键，name为普通索引）
 
 
-<div style="margin:auto;">
 |  id   | name  | sex  | flag  |
 |  :--:  | :--:  | :--:  | :--:  |
 | 1  | sj | m | A |
 | 3  | zs | m | A |
 | 5  | ls | m | A |
 | 9  | ww | f | B |
-</div>
 
 
 则MyISAM构建的B+树如下图所示：
