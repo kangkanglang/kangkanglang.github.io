@@ -2,10 +2,10 @@
 title: SpringBoot 、Mybatis 与 websocket 之间的一些问题
 author: Harrison
 categories:
-  - Problems
+  - 'Problems'
 tags:
-  - Problems
-  - Java
+  - 'Problems'
+  - 'Java'
 ---
 
 SpringBoot 、Mybatis 与 websocket 之间的一些问题，欢迎交流，指证错误。
