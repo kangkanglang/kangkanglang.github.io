@@ -2,10 +2,10 @@
 title: MySQL 索引（一）B-/+树
 author: Harrison
 categories:
-  - MySQL
+  - 'MySQL'
 tags:
-  - MySQL
-  - B-/+树
+  - 'MySQL'
+  - 'B-/+树'
 ---
 MySQL索引相关知识小结，欢迎交流，指证错误。
 <!-- more -->
