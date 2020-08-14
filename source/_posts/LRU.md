@@ -2,10 +2,10 @@
 title: LRU算法的实现
 author: Harrison
 categories:
-  - Java learning
+  - 'Java learning'
 tags:
-  - LRU
-  - 操作系统
+  - 'LRU'
+  - '操作系统'
 ---
 LRU算法的实现，欢迎交流，指证错误。
 <!-- more -->
