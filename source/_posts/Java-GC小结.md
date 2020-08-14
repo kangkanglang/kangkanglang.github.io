@@ -2,10 +2,10 @@
 title: Java GC 知识小结
 author: Harrison
 categories:
-  - Java learning
+  - 'Java learning'
 tags:
-  - JVM
-  - Java
+  - 'JVM'
+  - 'Java'
 ---
 Java GC相关知识小结，欢迎交流，指证错误。
 <!-- more -->
