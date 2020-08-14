@@ -2,10 +2,10 @@
 title: Hexo编写博客教程
 author: Harrison
 categories:
-  - Hexo
+  - 'Hexo'
 tags:
-  - learning
-  - blog
+  - 'learning'
+  - 'blog'
 ---
 
 这是我的第一篇博客，包含Hexo的基本使用，是一篇测试博客。
