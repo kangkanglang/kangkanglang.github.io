@@ -31,6 +31,33 @@
   
   
   <entry>
+    <title>Hexo编写博客教程</title>
+    <link href="/2020/08/14/Hexo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
+    <url>/2020/08/14/Hexo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<p>这是我的第一篇博客，包含Hexo的基本使用，是一篇测试博客。</p><a id="more"></a><p>欢迎来到<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! 这是我编写的第一个博客。你可以通过查看<a href="https://hexo.io/docs/" target="_blank" rel="noopener">文档</a>来获取等多的信息。如果在使用Hexo过程中遇到任何为题，你可以通过<a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a>寻找解决方法，或者你可以在<a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>上向我提问。</p><h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><p>欢迎来到<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! 这是我编写的第一个博客。你可以通过查看<a href="https://hexo.io/docs/" target="_blank" rel="noopener">文档</a>来获取等多的信息。如果在使用Hexo过程中遇到任何为题，你可以通过<a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a>寻找解决方法，或者你可以在<a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>上向我提问。</p><h2 id="快速入门-1"><a href="#快速入门-1" class="headerlink" title="快速入门"></a>快速入门</h2><hr><p>欢迎来到<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! 这是我编写的第一个博客。你可以通过查看<a href="https://hexo.io/docs/" target="_blank" rel="noopener">文档</a>来获取等多的信息。如果在使用Hexo过程中遇到任何为题，你可以通过<a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a>寻找解决方法，或者你可以在<a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>上向我提问。</p><h2 id="快速入门-2"><a href="#快速入门-2" class="headerlink" title="快速入门"></a>快速入门</h2><h3 id="创建一个post-播客页面"><a href="#创建一个post-播客页面" class="headerlink" title="创建一个post(播客页面)"></a>创建一个post(播客页面)</h3><pre><code class="hljs bash">$ hexo new <span class="hljs-string">"My New Post"</span></code></pre><p>更过<a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">博客编写信息</a>。</p><h3 id="启动Hexo-Server"><a href="#启动Hexo-Server" class="headerlink" title="启动Hexo Server"></a>启动Hexo Server</h3><pre><code class="hljs bash">$ hexo server</code></pre><p>有关<a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a>更多信息。</p><h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><pre><code class="hljs bash">$ hexo generate</code></pre><p>关于<a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a>更多信息。</p><h3 id="部署到服务器站点"><a href="#部署到服务器站点" class="headerlink" title="部署到服务器站点"></a>部署到服务器站点</h3><pre><code class="hljs bash">$ hexo deploy</code></pre><p>关于<a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a>更多信息。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Hexo</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>learning</tag>
+      
+      <tag>blog</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Java GC 知识小结</title>
     <link href="/2020/08/14/Java-GC%E5%B0%8F%E7%BB%93/"/>
     <url>/2020/08/14/Java-GC%E5%B0%8F%E7%BB%93/</url>
