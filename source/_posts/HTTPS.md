@@ -2,10 +2,10 @@
 title: HTTPS知识积累
 author: Harrison
 categories:
-  - Java learning
+  - 'Java learning'
 tags:
-  - HTTPS
-  - HTTP
+  - 'HTTPS'
+  - 'HTTP'
 ---
 HTTPS相关知识小结，欢迎交流，指证错误。
 <!-- more -->
