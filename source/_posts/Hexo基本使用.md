@@ -1,13 +1,13 @@
 ---
 title: Hexo编写博客教程
-<<<<<<< HEAD
-<<<<<<< HEAD
+author: Harrison
 categories:
   - Hexo
 tags:
   - learning
   - blog
 ---
+
 这是我的第一篇博客，包含Hexo的基本使用，是一篇测试博客。
 
 <!-- more -->
@@ -17,14 +17,10 @@ tags:
 
 ## 快速入门
 
-=======
----
 欢迎来到[Hexo](https://hexo.io/)! 这是我编写的第一个博客。你可以通过查看[文档](https://hexo.io/docs/)来获取等多的信息。如果在使用Hexo过程中遇到任何为题，你可以通过[troubleshooting](https://hexo.io/docs/troubleshooting.html)寻找解决方法，或者你可以在[GitHub](https://github.com/hexojs/hexo/issues)上向我提问。
 
 ## 快速入门
 
-
-=======
 ---
 欢迎来到[Hexo](https://hexo.io/)! 这是我编写的第一个博客。你可以通过查看[文档](https://hexo.io/docs/)来获取等多的信息。如果在使用Hexo过程中遇到任何为题，你可以通过[troubleshooting](https://hexo.io/docs/troubleshooting.html)寻找解决方法，或者你可以在[GitHub](https://github.com/hexojs/hexo/issues)上向我提问。
 
