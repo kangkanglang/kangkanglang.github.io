@@ -17,7 +17,7 @@
   <meta name="description" content="这是我的个人博客！">
   <meta name="author" content="Harrison">
   <meta name="keywords" content="">
-  <title>SpringBoot 、Mybatis 与 websocket 之间的一些问题 | Harrison</title>
+  <title>Hexo编写博客教程 | Harrison</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -154,7 +154,7 @@
           <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
-                SpringBoot 、Mybatis 与 websocket 之间的一些问题
+                Hexo编写博客教程
               
             </span>
 
@@ -162,8 +162,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-23 19:20" pubdate>
-      2020年8月23日 晚上
+    <time datetime="2020-08-16 15:01" pubdate>
+      2020年8月16日 下午
     </time>
   </div>
 
@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      814 字
+      319 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      3
        分钟
     </span>
   
@@ -213,114 +213,27 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">SpringBoot 、Mybatis 与 websocket 之间的一些问题</h1>
+            <h1 style="display: none">Hexo编写博客教程</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>SpringBoot 、Mybatis 与 websocket 之间的一些问题，欢迎交流，指证错误。</p>
+              <p>这是我的第一篇博客，包含Hexo的基本使用，是一篇测试博客。</p>
 <a id="more"></a>
 
-<p>最近在做一个小项目，用到了SpringBoot 和 websocket，先大概讲一下所遇到的问题。</p>
-<p>问题：</p>
-<blockquote>
-<p>前端JS通过websocket和和服务器中的WebSocketServlet 连接，在WebSocketServlet中注入HeatMapService，这时候出现第一个问题，<font color="red">发现注入的HeatMapService为null，也就是说这个时候Spring容器无法将HeatMapService注入</font>；当时没太在意，想着既然Spring无法注入，那就自己实例化 HeatMapService 就好了，然后就傻乎乎的自己实例化了HeatMapService，到这没啥大问题，至少代码跑起来了。下午准备把数据存到数据库时，出现了第二个问题，<font color="red">在HeatMapServiceImpl中想要注入HeatMapMapper时，发现此时注入的HeatMapMapper居然也为null</font>，自己的第一反应是Mybatis和SpringBoot整合时可能出问题了，检查MainApplication.java上有添加@MapperScanner，对应路径也没有写错，那这是为什么无法注入Mapper呢？</p>
-</blockquote>
-<p>服务端websocket中的<font color="red">部分错误代码</font>：</p>
-<pre><code class="hljs java"><span class="hljs-meta">@ServerEndpoint</span>(value = <span class="hljs-string">"/websocket"</span>)
-<span class="hljs-meta">@Component</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebSocketServlet</span> </span>&#123;
-    
-    <span class="hljs-meta">@Autowired</span>
-    <span class="hljs-keyword">private</span> HeatMapService heatMapService;
+<p>欢迎来到<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! 这是我编写的第一个博客。你可以通过查看<a href="https://hexo.io/docs/" target="_blank" rel="noopener">文档</a>来获取等多的信息。如果在使用Hexo过程中遇到任何为题，你可以通过<a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a>寻找解决方法，或者你可以在<a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>上向我提问。</p>
+<h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><p>欢迎来到<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! 这是我编写的第一个博客。你可以通过查看<a href="https://hexo.io/docs/" target="_blank" rel="noopener">文档</a>来获取等多的信息。如果在使用Hexo过程中遇到任何为题，你可以通过<a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a>寻找解决方法，或者你可以在<a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>上向我提问。</p>
+<h2 id="快速入门-1"><a href="#快速入门-1" class="headerlink" title="快速入门"></a>快速入门</h2><p>欢迎来到<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! 这是我编写的第一个博客。你可以通过查看<a href="https://hexo.io/docs/" target="_blank" rel="noopener">文档</a>来获取等多的信息。如果在使用Hexo过程中遇到任何为题，你可以通过<a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a>寻找解决方法，或者你可以在<a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>上向我提问。</p>
+<h2 id="快速入门-2"><a href="#快速入门-2" class="headerlink" title="快速入门"></a>快速入门</h2><h3 id="创建一个post-播客页面"><a href="#创建一个post-播客页面" class="headerlink" title="创建一个post(播客页面)"></a>创建一个post(播客页面)</h3><pre><code class="hljs bash">$ hexo new <span class="hljs-string">"My New Post"</span></code></pre>
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> flag = <span class="hljs-keyword">false</span>;
+<p>更过<a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">博客编写信息</a>。</p>
+<h3 id="启动Hexo-Server"><a href="#启动Hexo-Server" class="headerlink" title="启动Hexo Server"></a>启动Hexo Server</h3><pre><code class="hljs bash">$ hexo server</code></pre>
 
-    <span class="hljs-comment">//用来存放每个客户端对应的webSocketSet对象。</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> CopyOnWriteArraySet&lt;WebSocketServlet&gt; webSocketSet = <span class="hljs-keyword">new</span> CopyOnWriteArraySet&lt;WebSocketServlet&gt;();
-    <span class="hljs-keyword">private</span>  Session session=<span class="hljs-keyword">null</span>;
+<p>有关<a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a>更多信息。</p>
+<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><pre><code class="hljs bash">$ hexo generate</code></pre>
 
-    <span class="hljs-comment">/**</span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@ClassName</span>: onOpen</span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@Description</span>: 开启连接的操作</span>
-<span class="hljs-comment">     */</span>
-    <span class="hljs-meta">@OnOpen</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onOpen</span><span class="hljs-params">(Session session)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;
-       <span class="hljs-comment">//TODO</span>
-    &#125;
+<p>关于<a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a>更多信息。</p>
+<h3 id="部署到服务器站点"><a href="#部署到服务器站点" class="headerlink" title="部署到服务器站点"></a>部署到服务器站点</h3><pre><code class="hljs bash">$ hexo deploy</code></pre>
 
-&#125;</code></pre>
-
-
-
-<p>先解决第二个问题：</p>
-<p>经过几个小时zz般的排查，依旧没有想清SpringBoot 和 Mybatis整合到底哪出错了，于是准备把整个流程重新捋一遍，当走到WebSocketServlet 时，才发现是自己上午实例化的HeatMapService的问题。<font color="red">由于是自己的手动实例化的，因此实例化的heatMapService对象肯定是不在Spring容器中的，根据Spring的“依赖注入”，自然也无法将HeatMapMapper注入到Spring容器中</font>。知道问题所在，那就把HeatMapService通过Spring的方式注入进容器即可，问题二解决。</p>
-<p>问题二解决了，自然问题一又回来了，为什么WebSocketServlet 中无法注入HeatMapService呢 ？<font color="red">原来WebSocket是多例的，而Spring管理的对象默认是单例的，即Spring默认只实例化一次HeatMapService，而WebSocketServlet 每新添加一个连接就会新增一个socket对象，自然无法将每一个socket对象中的HeatMapService进行实例化注入</font>。解决的办法就是将HeatMapService由成员变量，变成类变量即可，让所有的socket对象共享同一个HeatMapService。</p>
-<p>问题解决后的WebSocketServlet 代码：</p>
-<pre><code class="hljs java"><span class="hljs-meta">@ServerEndpoint</span>(value = <span class="hljs-string">"/websocket"</span>)
-<span class="hljs-meta">@Component</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebSocketServlet</span> </span>&#123;
-
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> HeatMapService heatMapService;
-
-    <span class="hljs-meta">@Autowired</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setHeatMapService</span><span class="hljs-params">(HeatMapService heatMapService)</span></span>&#123;
-        WebSocketServlet.heatMapService = heatMapService;
-    &#125;
-
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> flag = <span class="hljs-keyword">false</span>;
-
-    <span class="hljs-comment">//用来存放每个客户端对应的webSocketSet对象。</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> CopyOnWriteArraySet&lt;WebSocketServlet&gt; webSocketSet = <span class="hljs-keyword">new</span> CopyOnWriteArraySet&lt;WebSocketServlet&gt;();
-    <span class="hljs-keyword">private</span>  Session session=<span class="hljs-keyword">null</span>;
-
-    <span class="hljs-comment">/**</span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@ClassName</span>: onOpen</span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@Description</span>: 开启连接的操作</span>
-<span class="hljs-comment">     */</span>
-    <span class="hljs-meta">@OnOpen</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onOpen</span><span class="hljs-params">(Session session)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;
-      <span class="hljs-comment">//TODO</span>
-    &#125;
-
-    <span class="hljs-comment">/**</span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@ClassName</span>: onClose</span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@Description</span>: 连接关闭的操作</span>
-<span class="hljs-comment">     */</span>
-    <span class="hljs-meta">@OnClose</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClose</span><span class="hljs-params">()</span></span>&#123;
-        System.out.println(<span class="hljs-string">"connection is closed..."</span>);
-
-    &#125;
-
-    <span class="hljs-comment">/**</span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@ClassName</span>: onMessage</span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@Description</span>: 从前端接收消息</span>
-<span class="hljs-comment">     */</span>
-    <span class="hljs-meta">@OnMessage</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onMessage</span><span class="hljs-params">(String message)</span> </span>&#123;
-        <span class="hljs-comment">//TODO</span>
-    &#125;
-
-    <span class="hljs-comment">/**</span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@ClassName</span>: OnError</span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@Description</span>: 出错的操作</span>
-<span class="hljs-comment">     */</span>
-    <span class="hljs-meta">@OnError</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onError</span><span class="hljs-params">(Throwable error)</span></span>&#123;
-        System.out.println(error);
-    &#125;
-
-    <span class="hljs-comment">/**</span>
-<span class="hljs-comment">     * 将消息发送给前端</span>
-<span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendMessage</span><span class="hljs-params">(SensorVO sensor)</span></span>&#123;
-        <span class="hljs-comment">//TODO</span>
-    &#125;
-&#125;</code></pre>
-
-
-
-<p>参考 ：<a href="https://blog.csdn.net/m0_37202351/article/details/86255132" target="_blank" rel="noopener">spring springboot websocket 不能注入( @Autowired ) service bean 报 null 错误</a></p>
-<p>还是自己code太少了，项目经验太少，这样的错误，希望自己以后不会再犯~</p>
+<p>关于<a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a>更多信息。</p>
 
             </div>
             <hr>
@@ -330,7 +243,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Problems/">Problems</a>
+                      <a class="hover-with-bg" href="/categories/Hexo/">Hexo</a>
                     
                   </div>
                 
@@ -338,15 +251,15 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Problems/">Problems</a>
+                      <a class="hover-with-bg" href="/tags/learning/">learning</a>
                     
-                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                      <a class="hover-with-bg" href="/tags/blog/">blog</a>
                     
                   </div>
                 
               </div>
 			  <div>
-				<a href="https://github.com/kangkanglang/kangkanglang.github.io/edit/hexoBlog/source/_posts/WebSocket遇到问题.md" target="_blank"><font color="green"> ## Edit This Blog ## </font></a>
+				<a href="https://github.com/kangkanglang/kangkanglang.github.io/edit/hexoBlog/source/_posts/Hexo基本使用.md" target="_blank"><font color="green"> ## Edit This Blog ## </font></a>
 			  </div>
 			  
               
@@ -357,12 +270,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2020/08/16/HTTPS/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">HTTPS知识积累</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/16/FastDFS/">
-                        <span class="hidden-mobile">分布式文件系统FastDFS</span>
+                      <a href="/2020/08/16/Java-GC%E5%B0%8F%E7%BB%93/">
+                        <span class="hidden-mobile">Java GC 知识小结</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
