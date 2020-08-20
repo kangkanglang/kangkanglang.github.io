@@ -82,9 +82,9 @@ public interface FactoryBean<T> {
 ```
 
 在该接口中还定义了以下3个方法：
-```TgetObject()```：返回由FactoryBean创建的Bean实例，如果isSingleton()返回true，则该实例会放到Spring容器中单实例缓存池中；
-```booleanisSingleton()```：返回由FactoryBean创建的Bean实例的作用域是singleton还是prototype；
-```Class<T>getObjectType()```：返回FactoryBean创建的Bean类型。
+`TgetObject()`：返回由FactoryBean创建的Bean实例，如果isSingleton()返回true，则该实例会放到Spring容器中单实例缓存池中；
+`booleanisSingleton()`：返回由FactoryBean创建的Bean实例的作用域是singleton还是prototype；
+`Class<T>getObjectType()`：返回FactoryBean创建的Bean类型。
 当配置文件中<bean>的class属性配置的实现类是FactoryBean时，通过getBean()方法返回的不是FactoryBean本身，而是FactoryBean#getObject()方法所返回的对象，相当于FactoryBean#getObject()代理了getBean()方法。
 例：如果使用传统方式配置下面Car的<bean>时，Car的每个属性分别对应一个<property>元素标签，较为繁琐。
 
