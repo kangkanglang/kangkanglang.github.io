@@ -266,25 +266,16 @@
     <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isSingleton</span><span class="hljs-params">()</span></span>;  
 &#125;</code></pre>
 
-<p>在该接口中还定义了以下3个方法：</p>
-<pre><code class="hljs TgetObject()```：返回由FactoryBean创建的Bean实例，如果isSingleton()返回true，则该实例会放到Spring容器中单实例缓存池中；">&#96;&#96;&#96;booleanisSingleton()&#96;&#96;&#96;：返回由FactoryBean创建的Bean实例的作用域是singleton还是prototype；
-&#96;&#96;&#96;Class&lt;T&gt;getObjectType()&#96;&#96;&#96;：返回FactoryBean创建的Bean类型。
-当配置文件中&lt;bean&gt;的class属性配置的实现类是FactoryBean时，通过getBean()方法返回的不是FactoryBean本身，而是FactoryBean#getObject()方法所返回的对象，相当于FactoryBean#getObject()代理了getBean()方法。
-例：如果使用传统方式配置下面Car的&lt;bean&gt;时，Car的每个属性分别对应一个&lt;property&gt;元素标签，较为繁琐。
+<p>在该接口中还定义了以下3个方法：<br><code>TgetObject()</code>：返回由FactoryBean创建的Bean实例，如果isSingleton()返回true，则该实例会放到Spring容器中单实例缓存池中；<br><code>booleanisSingleton()</code>：返回由FactoryBean创建的Bean实例的作用域是singleton还是prototype；<br><code>Class&lt;T&gt;getObjectType()</code>：返回FactoryBean创建的Bean类型。<br>当配置文件中<bean>的class属性配置的实现类是FactoryBean时，通过getBean()方法返回的不是FactoryBean本身，而是FactoryBean#getObject()方法所返回的对象，相当于FactoryBean#getObject()代理了getBean()方法。<br>例：如果使用传统方式配置下面Car的<bean>时，Car的每个属性分别对应一个<property>元素标签，较为繁琐。</property></bean></bean></p>
+<p><strong>Java代码</strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.harrison.factorybean;
 
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Car</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> maxSpeed;
+    <span class="hljs-keyword">private</span> String brand;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> price;
 
-
-**Java代码**
-
-&#96;&#96;&#96;java
-package com.harrison.factorybean;
-
-public class Car &#123;
-    private int maxSpeed;
-    private String brand;
-    private double price;
-
-    &#x2F;&#x2F;Getter and Setter methods
+    <span class="hljs-comment">//Getter and Setter methods</span>
 &#125;</code></pre>
 
 
