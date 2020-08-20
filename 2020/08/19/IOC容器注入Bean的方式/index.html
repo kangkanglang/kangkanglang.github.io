@@ -222,8 +222,7 @@
 <p>Spring提供的主要功能就是对于Bean的管理，提供了多种方式可以向容器中注入Bean，下面总结一下向IOC容器注入Bean的几种方式（以下注入Bean的方式都是基于注解完成的）：</p>
 <h3 id="1-ComponentScan-Component方式"><a href="#1-ComponentScan-Component方式" class="headerlink" title="1. @ComponentScan+@Component方式"></a>1. @ComponentScan+@Component方式</h3><p>@ComponentScan可以扫描指定包下的类，如果该包下的类标有@Component、@Service、@Repository、@Controller、@RestController和@Configuration，都会被注入到IOC容器中，这种方式也是我们写代码最常用的，<strong>一般针对自己写的类。</strong></p>
 <p> 我们写的配置类，在上面标有@ComponentScan，指定扫描的的包，这时被扫描的类需要提供无参构造方法，不然会报错。</p>
-<pre><code class="hljs java">
-<span class="hljs-meta">@ComponentScan</span>(basePackages = &#123;<span class="hljs-string">"com.harrison"</span>&#125;)
+<pre><code class="hljs java"><span class="hljs-meta">@ComponentScan</span>(basePackages = &#123;<span class="hljs-string">"com.harrison"</span>&#125;)
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppConfig</span> </span>&#123;
  
 &#125;</code></pre>
