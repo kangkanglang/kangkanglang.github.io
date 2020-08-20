@@ -1,0 +1,642 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="这是我的个人博客！">
+  <meta name="author" content="Harrison">
+  <meta name="keywords" content="">
+  <title>IOC容器注入Bean的方式 | Harrison</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Harrison</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+                IOC容器注入Bean的方式
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-19 11:16" pubdate>
+      2020年8月19日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">IOC容器注入Bean的方式</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>IOC容器注入Bean的方式，欢迎交流，指证错误。</p>
+<a id="more"></a>
+
+<p>Spring提供的主要功能就是对于Bean的管理，提供了多种方式可以向容器中注入Bean，下面总结一下向IOC容器注入Bean的几种方式（以下注入Bean的方式都是基于注解完成的）：</p>
+<h3 id="1-ComponentScan-Component方式"><a href="#1-ComponentScan-Component方式" class="headerlink" title="1. @ComponentScan+@Component方式"></a>1. @ComponentScan+@Component方式</h3><p>@ComponentScan可以扫描指定包下的类，如果该包下的类标有@Component、@Service、@Repository、@Controller、@RestController和@Configuration，都会被注入到IOC容器中，这种方式也是我们写代码最常用的，<strong>一般针对自己写的类。</strong></p>
+<p> 我们写的配置类，在上面标有@ComponentScan，指定扫描的的包，这时被扫描的类需要提供无参构造方法，不然会报错。</p>
+<pre><code class="hljs java">
+<span class="hljs-meta">@ComponentScan</span>(basePackages = &#123;<span class="hljs-string">"com.harrison"</span>&#125;)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppConfig</span> </span>&#123;
+ 
+&#125;</code></pre>
+
+
+
+<p>若在 com.harrison 包下有User类，则在User类上添加@Component即可将User注入IOC容器。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.harrison.pojo;
+ 
+<span class="hljs-keyword">import</span> org.springframework.stereotype.Component;
+ 
+<span class="hljs-comment">//使用这种方式需要替换无参构造的方法，因为spring是调用无参构造方法创建类的</span>
+<span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;
+    
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> Integer age;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">()</span> </span>&#123;
+    &#125;
+ 
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">(String name, Integer age)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.age = age;
+    &#125;
+ 	
+    <span class="hljs-comment">// Getter and Setter methods</span>
+ 
+&#125;</code></pre>
+
+
+
+<h3 id="2-使用-Configuration-Bean注解"><a href="#2-使用-Configuration-Bean注解" class="headerlink" title="2. 使用@Configuration + @Bean注解"></a>2. 使用@Configuration + @Bean注解</h3><p>该方法一般用于导入的第三方包里面的组件，因为第三方包里面没有添加Spring相关的注解，所以使用第一种方式就不行了。</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserConfig</span> </span>&#123;
+ 
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 使用<span class="hljs-doctag">@Bean</span>方式向容器注入Bean，适用于导入的第三方包里面的组件</span>
+<span class="hljs-comment">     * 在<span class="hljs-doctag">@Bean</span>后面不跟其他属性时，Bean的名称默认使用方法名</span>
+<span class="hljs-comment">     * 在<span class="hljs-doctag">@Bean</span>("user")， 如指定方法名，则使用定制的方法名</span>
+<span class="hljs-comment">     * 在<span class="hljs-doctag">@Bean</span>中还有initMethod属性和destroyMethod属性，可以指定初始话方法和销毁方法</span>
+<span class="hljs-comment">     */</span>
+ 
+    <span class="hljs-meta">@Bean</span>(<span class="hljs-string">"user"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">user</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> User();
+    &#125;</code></pre>
+
+
+
+<h3 id="3-使用-Import注解"><a href="#3-使用-Import注解" class="headerlink" title="3. 使用@Import注解"></a>3. 使用@Import注解</h3><p> 该方法注入的Bean的id默认是组件的全类名 ，使用@Import就是将类注入到容器中，如果要注入的类没有被标注@Component也能被注入进来，一般注入的都是标注了@Configuration的配置类。</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 该方式会将Bike类注入到容器中</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> * */</span>
+<span class="hljs-meta">@Configuration</span>
+<span class="hljs-meta">@Import</span>(&#123;Bike<span class="hljs-class">.<span class="hljs-keyword">class</span>&#125;)</span>
+<span class="hljs-class"><span class="hljs-title">public</span> <span class="hljs-title">class</span> <span class="hljs-title">Config</span> </span>&#123;
+ 
+&#125;
+ 
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bike</span> </span>&#123;
+ 
+&#125;</code></pre>
+
+
+
+<h3 id="4-实现ImportSelector接口来向容器注入bean"><a href="#4-实现ImportSelector接口来向容器注入bean" class="headerlink" title="4. 实现ImportSelector接口来向容器注入bean"></a>4. 实现ImportSelector接口来向容器注入bean</h3><p><strong>注意：使用这种方式的话返回值不能为null，不然会出现空指针异常</strong></p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment">*使用<span class="hljs-doctag">@Import</span>注解，是将MyImportSelector类注入到IOC容器中，至于它是不是ImportSelector的实现类，</span>
+<span class="hljs-comment">*这个<span class="hljs-doctag">@Import</span>注解是不进行判断的，在注入这个Bean后，有其他的组件会找到ImportSelector的实现类，并调</span>
+<span class="hljs-comment">*用selectImports方法进行注册Bean</span>
+<span class="hljs-comment">* */</span>
+ 
+<span class="hljs-meta">@Configuration</span>
+<span class="hljs-meta">@Import</span>(&#123;MyImportSelector<span class="hljs-class">.<span class="hljs-keyword">class</span>&#125;)</span>
+<span class="hljs-class"><span class="hljs-title">public</span> <span class="hljs-title">class</span> <span class="hljs-title">ImportConfig</span> </span>&#123;
+ 
+&#125;
+ 
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyImportSelector</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ImportSelector</span> </span>&#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 返回值，就是到导入到容器中的组件全类名，返回值时一个字符串数组，可以导入多个bean</span>
+<span class="hljs-comment">     * AnnotationMetadata:当前标注<span class="hljs-doctag">@Import</span>注解的类的所有注解信息</span>
+<span class="hljs-comment">     * */</span>
+    <span class="hljs-keyword">public</span> String[] selectImports(AnnotationMetadata importingClassMetadata) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> String[]&#123;<span class="hljs-string">"com.harrison.User"</span>&#125;;
+    &#125;
+&#125;</code></pre>
+
+
+
+<h3 id="5-实现ImportBeanDefinitionRegistrar接口来向容器注入Bean"><a href="#5-实现ImportBeanDefinitionRegistrar接口来向容器注入Bean" class="headerlink" title="5. 实现ImportBeanDefinitionRegistrar接口来向容器注入Bean"></a>5. 实现ImportBeanDefinitionRegistrar接口来向容器注入Bean</h3><p>这里的代码来自于DataSourceInitializedPublisher$Registrar类</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * &#123;<span class="hljs-doctag">@link</span> ImportBeanDefinitionRegistrar&#125; to register the</span>
+<span class="hljs-comment"> * &#123;<span class="hljs-doctag">@link</span> DataSourceInitializedPublisher&#125; without causing early bean instantiation</span>
+<span class="hljs-comment"> * issues.</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Registrar</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ImportBeanDefinitionRegistrar</span> </span>&#123;
+ 
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String BEAN_NAME = <span class="hljs-string">"dataSourceInitializedPublisher"</span>;
+ 
+      <span class="hljs-comment">/**</span>
+<span class="hljs-comment">       * AnnotationMetadata：当前类的注解信息</span>
+<span class="hljs-comment">       * BeanDefinitionRegistry:BeanDefinition注册类；</span>
+<span class="hljs-comment">       *      把所有需要添加到容器中的bean；调用</span>
+<span class="hljs-comment">       *      BeanDefinitionRegistry.registerBeanDefinition手工注册进来</span>
+<span class="hljs-comment">       */</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">registerBeanDefinitions</span><span class="hljs-params">(AnnotationMetadata importingClassMetadata,</span></span>
+<span class="hljs-function"><span class="hljs-params">                                        BeanDefinitionRegistry registry)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (!registry.containsBeanDefinition(BEAN_NAME)) &#123;
+            GenericBeanDefinition beanDefinition = <span class="hljs-keyword">new</span> GenericBeanDefinition();
+            beanDefinition.setBeanClass(DataSourceInitializedPublisher<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;
+            beanDefinition.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
+            <span class="hljs-comment">// We don't need this one to be post processed otherwise it can cause a</span>
+            <span class="hljs-comment">// cascade of bean instantiation that we would rather avoid.</span>
+            beanDefinition.setSynthetic(<span class="hljs-keyword">true</span>);
+            registry.registerBeanDefinition(BEAN_NAME, beanDefinition);
+        &#125;
+    &#125;
+ 
+&#125;</code></pre>
+
+
+
+<p>该方法可以有选择性的注入bean，传递的参数可以获取到IOC容器中关于bean的BeanDefinitionRegistry，使用这样方式比较灵活，在查看Spring源码时，大量使用了这种方式。</p>
+<p>ImportBeanDefinitionRegistrar的实现类，必须是被@Import进行导入的，如@Import（Registrar .class）,如果不使用@Import注解导入Registrar类，而是使用一个@Component注解，将Registrar类通过扫描的方式放入到容器中，那么registerBeanDefinitions方法就不会被执行。</p>
+<blockquote>
+<p>@Import导入的原理：</p>
+<p>处理这个@Import是在ConfigurationClassPostProcessor类中进行的，ConfigurationClassPostProcessor类会扫描出所有的对象，封装成beanDefinition对象，然后判断是否对象中是否加了@Import注解，加了的话判断是否为<strong>ImportBeanDefinitionRegistrar</strong>的实现类，如果是，则执行接口对象的方法（这只是见简单的说一下，其实步骤复杂的多，会有递归调用什么的，这里简单理解一下就行）<strong>。</strong></p>
+</blockquote>
+<h3 id="6-实现Factory-Bean接口向容器注入Bean"><a href="#6-实现Factory-Bean接口向容器注入Bean" class="headerlink" title="6. 实现Factory Bean接口向容器注入Bean"></a>6. 实现Factory Bean接口向容器注入Bean</h3><p><strong>使用Spring提供的 FactoryBean（工厂Bean），默认获取到的是工厂bean调用getObject创建的对象，要获取工厂Bean本身，我们需要给id前面加一个&amp;。</strong></p>
+<pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FactoryBeanConfig</span> </span>&#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 在容器里面注入UserFactoryBean</span>
+<span class="hljs-comment">     * 在获取userFactoryBean名称的Bean时，得到的是User类型的bean，如想要得到UserFactoryBean类型的bean，需要使用</span>
+<span class="hljs-comment">     * AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(FactoryBeanConfig.class);</span>
+<span class="hljs-comment">     * String[] beanDefinitionNames = context.getBeanDefinitionNames("&amp;userFactoryBean");  这种获取的是UserFactoryBean类型的bean</span>
+<span class="hljs-comment">     * String[] beanDefinitionNames = context.getBeanDefinitionNames("userFactoryBean");  这种获取的是User类型的bean</span>
+<span class="hljs-comment">     * */</span>
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> UserFactoryBean <span class="hljs-title">userFactoryBean</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> UserFactoryBean();
+    &#125;
+&#125;
+ 
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserFactoryBean</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FactoryBean</span> </span>&#123;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getObject</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> User();
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isSingleton</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Class&lt;?&gt; getObjectType() &#123;
+        <span class="hljs-keyword">return</span> User<span class="hljs-class">.<span class="hljs-keyword">class</span></span>;
+    &#125;
+&#125;</code></pre>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Spring/">Spring</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/FactoryBean/">FactoryBean</a>
+                    
+                      <a class="hover-with-bg" href="/tags/IOC/">IOC</a>
+                    
+                  </div>
+                
+              </div>
+			  <div>
+				<a href="https://github.com/kangkanglang/kangkanglang.github.io/edit/hexoBlog/source/_posts/IOC容器注入Bean的方式.md" target="_blank"><font color="green"> ## Edit This Blog ## </font></a>
+			  </div>
+			  
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/19/BeanFactory%20%E5%92%8C%20FactoryBean%E7%9A%84%E5%8C%BA%E5%88%AB/">
+                        <span class="hidden-mobile">BeanFactory和FactoryBean的区别</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+
+              </article>
+            
+			  
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
