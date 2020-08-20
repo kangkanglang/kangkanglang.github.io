@@ -24,7 +24,6 @@ Spring提供的主要功能就是对于Bean的管理，提供了多种方式可�
  我们写的配置类，在上面标有@ComponentScan，指定扫描的的包，这时被扫描的类需要提供无参构造方法，不然会报错。
 
 ```java
-
 @ComponentScan(basePackages = {"com.harrison"})
 public class AppConfig {
  
