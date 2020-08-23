@@ -1,0 +1,589 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="这是我的个人博客！">
+  <meta name="author" content="Harrison">
+  <meta name="keywords" content="">
+  <title>数组中数字出现的次数 | Harrison</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Harrison</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+                数组中数字出现的次数
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-23 22:16" pubdate>
+      2020年8月23日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">数组中数字出现的次数</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>记录Leetcode上的一道题目，欢迎交流，指证错误。</p>
+<a id="more"></a>
+
+<h3 id="1-普通版"><a href="#1-普通版" class="headerlink" title="1. 普通版"></a>1. 普通版</h3><p><a href="https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/" target="_blank" rel="noopener">LeetCode链接</a></p>
+<p><strong>题目：</strong></p>
+<p>一个整型数组 <code>nums</code>里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。</p>
+<p><strong>示例 1：</strong></p>
+<blockquote>
+<p>输入：nums = [4,1,4,6]<br>输出：[1,6] 或 [6,1]</p>
+</blockquote>
+<p><strong>示例 2：</strong></p>
+<blockquote>
+<p> 输入：nums = [1,2,10,4,1,4,3,3]<br>输出：[2,10] 或 [10,2]</p>
+</blockquote>
+<p><strong>限制：</strong></p>
+<blockquote>
+<p> 2 &lt;= nums.length &lt;= 10000</p>
+</blockquote>
+<p><strong>解题思路：</strong></p>
+<p>如果不考虑空间复杂度的话，可以考虑用map来完成，数组中的数字为key，出现的次数为value。要求时间复杂度为O(n)，空间复杂度为O(1)。</p>
+<p>我们知道：两个相同的数字进行异或运算结果为<code>0</code>，任何数字与<code>0</code>异或运算结果为数字本身。若数组中只有一个数字只出现一次的话，则将所有数字直接异或运算，就能得到只出现一次的数字。现在数组中有两个只出现了一次的数字，则可以考虑将数组分成2块，让每一块中保证只有一个数字出现一次。</p>
+<p>接下来只需考虑如何将数组分成2块:</p>
+<blockquote>
+<ul>
+<li>重复的数字进行分组，很简单，只需要有一个统一的规则，就可以把相同的数字分到同一组了。例如：奇偶分组。因为重复的数字，数值都是一样的，所以一定会分到同一组！</li>
+<li>两个不同数字的分组，假设为数字a，b。若我们将所有数字进行异或运算，得到数字k，则得到的k应该为数字a与b的异或结果。因为相同的数字异或结果为<code>0</code>，而任何数与<code>0</code>异或的结果为自身。对于数字k的二进制来说，若二进制中第一位数字1，则表示数字a和b的二进制中第一位不同（因为<code>0</code>与<code>1</code>异或为<code>1</code>，<code>0</code>与<code>0</code>异或为 0，<code>1</code>与<code>1</code>异或为0）。因此只要找到k的二进制数种任意一位为<code>1</code>，即可将a和b进行区分。</li>
+</ul>
+</blockquote>
+<p><strong>代码：</strong></p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] singleNumbers(<span class="hljs-keyword">int</span>[] nums) &#123;
+        <span class="hljs-comment">//用于将所有的数异或起来</span>
+        <span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> num: nums) &#123;
+            k ^= num;
+        &#125;
+        <span class="hljs-comment">//这里 从最低位开始找k中的1</span>
+        <span class="hljs-keyword">int</span> mask = <span class="hljs-number">1</span>;
+        <span class="hljs-comment">//(k &amp; mask) == 1时表示已找到k中最低位的1，存于mask中，我们假设在index这个位为1</span>
+        <span class="hljs-keyword">while</span>((k &amp; mask) == <span class="hljs-number">0</span>) &#123;
+            mask &lt;&lt;= <span class="hljs-number">1</span>;
+        &#125;
+        <span class="hljs-keyword">int</span> a = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span> b = <span class="hljs-number">0</span>;
+ 		<span class="hljs-comment">//这里 让index位为0的数字和a分到一组，index位为1的分为一组（这里没有采用奇偶分组）</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> num: nums) &#123;
+            <span class="hljs-keyword">if</span>((num &amp; mask) == <span class="hljs-number">0</span>) &#123;
+                a ^= num;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                b ^= num;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;a, b&#125;;
+    &#125;
+&#125;</code></pre>
+
+
+
+<h3 id="2-进阶版"><a href="#2-进阶版" class="headerlink" title="2. 进阶版"></a>2. 进阶版</h3><p><a href="https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/" target="_blank" rel="noopener">LeetCode链接</a></p>
+<p><strong>题目：</strong></p>
+<p>在一个数组 nums 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。</p>
+<p><strong>示例 1：</strong></p>
+<blockquote>
+<p>输入：nums = [3,4,3,3]<br>输出：4</p>
+</blockquote>
+<p><strong>示例 2：</strong></p>
+<blockquote>
+<p> 输入：nums = [9,1,7,9,7,9,7]<br>输出：1</p>
+</blockquote>
+<p><strong>限制：</strong></p>
+<blockquote>
+<p>1 &lt;= nums.length &lt;= 10000<br>1 &lt;= nums[i] &lt; 2^31</p>
+</blockquote>
+<p><strong>解题思路（源于剑指Offer）：</strong></p>
+<p>这次是只有一个数字只出现了一次，但其他数字却出现了3次，因此也不能直接把所有数字进行异或运算，从而求出不一样的数字。<strong>如果一个数字出现三次,那么它的二进制表示的每一位(0或者1)也出现三次，则把所有出现三次的数字的二进制表示的每一位都分别加起来,那么每一位的和都能被3整除。如果某一位的和能被3整除,那么那个只出现一次的数字二进制表示中对应的那一位是0;否则就是1;</strong></p>
+<p><strong>上述思路同样适用于数组中一个数字出现一次，其他数字出现奇数次问题(如果是偶数次，直接用异或就可)。</strong></p>
+<p><strong>代码：</strong></p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">singleNumber</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        <span class="hljs-comment">//在java语言中，一个int数字4字节，32位。</span>
+        <span class="hljs-comment">//sums 统计结果</span>
+        <span class="hljs-keyword">int</span>[] sums = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">32</span>];
+        <span class="hljs-keyword">int</span> result = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++)&#123;
+            <span class="hljs-keyword">int</span> mask = <span class="hljs-number">1</span> &lt;&lt; i;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; nums.length; j++)&#123;
+                <span class="hljs-comment">//(mask &amp; nums[j]) == mask 表示nums[j]的二进制中第i位为1</span>
+                <span class="hljs-keyword">if</span>((mask &amp; nums[j]) == mask) sums[i] += <span class="hljs-number">1</span>;
+            &#125;
+            sums[i] %= <span class="hljs-number">3</span>;
+            <span class="hljs-keyword">if</span>(sums[i] == <span class="hljs-number">1</span>) result += mask;
+        &#125;
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+&#125;</code></pre>
+
+
+
+<h3 id="3-小结"><a href="#3-小结" class="headerlink" title="3. 小结"></a>3. 小结</h3><p><strong>Java中的位运算：</strong></p>
+<blockquote>
+<ul>
+<li>与（&amp;）运算：<code>1 &amp; 1 为 1; 1 &amp; 0 为 0; 0 &amp; 1 为 0； 0 &amp; 0 为 0 。</code></li>
+<li>或（|）运算：<code>1 | 1 为 1; 1 | 0 为 1; 0 | 1 为 1； 0 | 0 为 0 。</code></li>
+<li>非（<del>）运算：`</del> 1 为 0; ~ 0 为 1 。`</li>
+<li>异或（^）运算：<code>1 ^ 1 为 0; 1 ^ 0 为 1; 0 ^ 1 为 1； 0 ^ 0 为 0 。</code></li>
+</ul>
+</blockquote>
+<p><code>Java</code> 可在整数类型（<em><code>integral type</code></em>）数据上进行位（<em><code>bit</code></em>）运算</p>
+<p>整数类型：</p>
+<ul>
+<li>字节型(<code>byte</code>，<code>8</code> 位)</li>
+<li>短整型(<code>short</code>，<code>16</code> 位)</li>
+<li>整型(<code>int</code>，<code>32</code> 位)</li>
+<li>长整型(<code>long</code>，<code>64</code> 位)</li>
+</ul>
+<p><strong>Java中的移位运算：</strong></p>
+<blockquote>
+<ul>
+<li>左移运算符（<code>&lt;&lt;</code>）：丢弃最高位，0补最低位；<code>4 &lt;&lt; 2 为 16; -4 &lt;&lt; 2 为 -16</code></li>
+<li>右移运算符（<code>&gt;&gt;</code>）：符号位不变，左边补上符号位； <code>4 &gt;&gt; 2 为 1; -4 &gt;&gt; 2 为 -1</code></li>
+<li>无符号右移运算符（<code>&gt;&gt;&gt;</code>）：忽略了符号位扩展，0补最高位；</li>
+</ul>
+</blockquote>
+<p>PS:无符号右移规则和右移运算是一样的，只是填充时不管左边的数字是正是负都用0来填充，无符号右移运算只针对负数计算，因为对于正数来说这种运算没有意义</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+              </div>
+			  <div>
+				<a href="https://github.com/kangkanglang/kangkanglang.github.io/edit/hexoBlog/source/_posts/数组中数字出现的次数.md" target="_blank"><font color="green"> ## Edit This Blog ## </font></a>
+			  </div>
+			  
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/19/IOC%E5%AE%B9%E5%99%A8%E6%B3%A8%E5%85%A5Bean%E7%9A%84%E6%96%B9%E5%BC%8F/">
+                        <span class="hidden-mobile">IOC容器注入Bean的方式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+
+              </article>
+            
+			  
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
