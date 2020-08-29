@@ -14,7 +14,7 @@ tags:
 <!-- more -->
 
 之前在Github上clone了一个[微人事项目](https://github.com/lenve/vhr)，然后在本地虚拟机上安装了FastDFS，之前是测试通过了。但是今天再次使用FastDFS时，却报如下错误：
-自己在本地搭建FastDFS项目，项目源码在[我的GitHub]()上。
+自己在本地搭建FastDFS项目，项目源码在[我的GitHub](https://github.com/kangkanglang/JavaLearning/tree/master/FastDFSTest)上。
 
 > <font color=red>com.github.tobato.fastdfs.exception.FdfsConnectException: 无法获取服务端连接资源：can’t create connection to/192.168.xxx.xxx:22122</font>
 
