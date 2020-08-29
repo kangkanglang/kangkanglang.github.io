@@ -157,7 +157,7 @@ service fdfs_storaged start # 开启Storage Server
 
 ## 4. 利用FastDFS [Java客户端](https://github.com/tobato/FastDFS_Client)测试
 
-测试源代码在我的[GitHub](https://github.com/kangkanglang/FastDFS_Client_Test)上。
+测试源代码在我的[GitHub](https://github.com/kangkanglang/JavaLearning/tree/master/FastDFSTest)上。
 
 1. 根据[FastDFS_Client的文档](https://github.com/tobato/FastDFS_Client)，将FastDFS-Client客户端引入本地化项目的方式非常简单，在SpringBoot项目`/src/[com.xxx.主目录]/conf`当中配置
 
