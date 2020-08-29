@@ -5,8 +5,8 @@ author: Harrison
 categories:
   - 'Hexo'
 tags:
-  - 'learning'
-  - 'blog'
+  - 'Learning'
+  - 'Blog'
 ---
 
 这是我的第一篇博客，包含Hexo的基本使用，是一篇测试博客。
