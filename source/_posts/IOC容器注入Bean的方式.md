@@ -9,7 +9,7 @@ tags:
   - "FactoryBean"
 ---
 
-IOC容器注入Bean的方式，欢迎交流，指证错误。
+IOC容器注入Bean的方式，欢迎交流，指正错误。
 
 <!-- more -->
 
