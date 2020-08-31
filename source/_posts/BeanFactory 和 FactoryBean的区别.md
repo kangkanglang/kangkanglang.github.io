@@ -9,7 +9,7 @@ tags:
   - "FactoryBean"
 ---
 
-BeanFactory和FactoryBean的区别，欢迎交流，指证错误。
+BeanFactory和FactoryBean的区别，欢迎交流，指正错误。
 
 <!-- more -->
 
