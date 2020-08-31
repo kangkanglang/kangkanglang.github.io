@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.3k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      17
        分钟
     </span>
   
@@ -236,6 +236,15 @@
 </ol>
 </blockquote>
 <p>若需要实现<strong>非递减</strong>排序，则应建立大根堆（因为每次弹出的都是根节点是放在未排序数组的最后）；<br>同理，若需要实现<strong>非递增</strong>排序，则应建立小根堆。</p>
+<h4 id="1-1-复杂度分析"><a href="#1-1-复杂度分析" class="headerlink" title="1.1. 复杂度分析"></a>1.1. 复杂度分析</h4><blockquote>
+<ul>
+<li>时间复杂度（平均）：O(nlogn)</li>
+<li>时间复杂度（最坏）：O(nlogn)</li>
+<li>时间复杂度（最好）：O(nlogn)</li>
+<li>空间复杂度：O(1)</li>
+<li>稳定性：不稳定</li>
+</ul>
+</blockquote>
 <h3 id="2-非递减排序实现"><a href="#2-非递减排序实现" class="headerlink" title="2. 非递减排序实现"></a>2. 非递减排序实现</h3><pre><code class="hljs java"><span class="hljs-comment">/**</span>
 <span class="hljs-comment"> * 基于大根堆实现非递减排序</span>
 <span class="hljs-comment"> * <span class="hljs-doctag">@param</span> arr 待排序数组</span>
