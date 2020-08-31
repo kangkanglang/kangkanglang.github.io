@@ -1,0 +1,566 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="这是我的个人博客！">
+  <meta name="author" content="Harrison">
+  <meta name="keywords" content="">
+  <title>排序算法之快速排序 | Harrison</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Harrison</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+                排序算法之快速排序
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-31 22:56" pubdate>
+      2020年8月31日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      844 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">排序算法之快速排序</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>快速排序算法实现，欢迎交流，指正错误。</p>
+<a id="more"></a>
+
+<h3 id="1-快速排序"><a href="#1-快速排序" class="headerlink" title="1. 快速排序"></a>1. 快速排序</h3><p>快速排序（Quicksort）是对冒泡排序的一种改进。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以<a href="https://baike.baidu.com/item/递归/1740695" target="_blank" rel="noopener">递归</a>进行，以此达到整个数据变成有序<a href="https://baike.baidu.com/item/序列/1302588" target="_blank" rel="noopener">序列</a>。</p>
+<p>采用了分治的思想：</p>
+<blockquote>
+<p>该方法的基本思想是：</p>
+<ul>
+<li>先从数列中取出一个数作为基准数。</li>
+<li>分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</li>
+<li>再对左右区间重复第二步，直到各区间只有一个数。  </li>
+</ul>
+</blockquote>
+<h4 id="1-1-复杂度分析"><a href="#1-1-复杂度分析" class="headerlink" title="1.1. 复杂度分析"></a>1.1. 复杂度分析</h4><blockquote>
+<ul>
+<li>时间复杂度（平均）：O(nlogn)</li>
+<li>时间复杂度（最坏）：O(n^2)   （退化为冒泡排序）</li>
+<li>时间复杂度（最好）：O(nlogn)</li>
+<li>空间复杂度：O(nlogn)</li>
+<li>稳定性：不稳定</li>
+</ul>
+</blockquote>
+<h3 id="2-快速排序实现"><a href="#2-快速排序实现" class="headerlink" title="2. 快速排序实现"></a>2. 快速排序实现</h3><pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 快速排序的实现</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> == arr || <span class="hljs-number">1</span> &gt;= arr.length) &#123; <span class="hljs-keyword">return</span>; &#125;
+
+    quickSort(arr, <span class="hljs-number">0</span>, arr.length - <span class="hljs-number">1</span>);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span></span>&#123;
+    <span class="hljs-keyword">if</span> (start &gt;= end) &#123; <span class="hljs-keyword">return</span>; &#125;
+	<span class="hljs-comment">// 寻找左右划分的边界</span>
+    <span class="hljs-keyword">int</span> boundary = findBoundary(arr, start, end);
+	<span class="hljs-comment">// 左边使用快排</span>
+    quickSort(arr, start, boundary - <span class="hljs-number">1</span>);
+    <span class="hljs-comment">// 右边使用快排</span>
+    quickSort(arr, boundary + <span class="hljs-number">1</span>, end);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findBoundary</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span></span>&#123;
+    <span class="hljs-keyword">int</span> pivot = arr[start]; <span class="hljs-comment">// 以第一个元素作为基准</span>
+   
+    <span class="hljs-keyword">while</span> (l &lt; r)&#123;
+        <span class="hljs-comment">// 最右边开始找， 找到第一个比pivot小的数</span>
+        <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; pivot &lt;= arr[r]) &#123; r--; &#125;
+        arr[l] = arr[r];
+        <span class="hljs-comment">// 最左边开始找，找到以一个比pivot大的数</span>
+        <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; arr[l] &lt;= pivot) &#123; l++; &#125;
+        arr[r] = arr[l];
+    &#125;
+    arr[l] = pivot;
+    <span class="hljs-comment">// 返回边界值</span>
+    <span class="hljs-keyword">return</span> l;
+&#125;</code></pre>
+
+
+
+<h3 id="3-快速排序的应用"><a href="#3-快速排序的应用" class="headerlink" title="3. 快速排序的应用"></a>3. 快速排序的应用</h3><p>题目：</p>
+<blockquote>
+<p>有一个整数数组，请你根据<strong>快速排序</strong>的思路，找出数组中第K大的数。</p>
+<p>给定一个整数数组a,同时给定它的大小n和要找的K(K在1到n之间)，请返回第K大的数，保证答案存在。</p>
+</blockquote>
+<p>思路：</p>
+<p>一般top K问题适合用堆排序解决，但此处要求使用快速排序的思路解决。</p>
+<p>我们知道快速排序每经历一次排序后（降序排序），<code>pivot</code>所处的位置是固定的，因为<code>pivot</code>前面的数都不小于它，而<code>pivot</code>后面的数都不大于它，因此经过K次排序后的结果即为第K大。</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findKth</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> K)</span> </span>&#123;
+    <span class="hljs-comment">// write code here</span>
+    <span class="hljs-keyword">if</span>(a == <span class="hljs-keyword">null</span> || a.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">return</span> quickSort(K, a, <span class="hljs-number">0</span>, n-<span class="hljs-number">1</span>);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> K, <span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span></span>&#123;
+	<span class="hljs-comment">// 寻找边界</span>
+    <span class="hljs-keyword">int</span> boundary = findBoundary(a, start, end);
+    <span class="hljs-comment">// 边界值 + 1 == K，找到第K大的数</span>
+    <span class="hljs-keyword">if</span>(boundary + <span class="hljs-number">1</span> == K)
+        <span class="hljs-keyword">return</span> a[boundary];
+    <span class="hljs-comment">// 边界值 + 1 &lt; K，应在右半部分找第K大的数</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(boundary + <span class="hljs-number">1</span> &lt; K)
+        <span class="hljs-keyword">return</span> quickSort(K, a, boundary + <span class="hljs-number">1</span>, end);
+    <span class="hljs-comment">// 边界值 + 1 &gt; K，应在左半部分找第K大的数</span>
+    <span class="hljs-keyword">else</span> 
+        <span class="hljs-keyword">return</span> quickSort(K, a, start, boundary - <span class="hljs-number">1</span>);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findBoundary</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span></span>&#123;
+    <span class="hljs-keyword">int</span> pivot = a[start];
+    <span class="hljs-keyword">while</span>(start &lt; end)&#123;
+        <span class="hljs-keyword">while</span>(start &lt; end &amp;&amp; a[end] &lt;= pivot) end--;
+        a[start] = a[end];
+        <span class="hljs-keyword">while</span>(start &lt; end &amp;&amp; a[start] &gt;= pivot) start++;
+        a[end] = a[start];
+    &#125;
+    a[start] = pivot;
+    <span class="hljs-keyword">return</span> start;
+&#125;</code></pre>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java-learning/">Java learning</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Sort/">Sort</a>
+                    
+                  </div>
+                
+              </div>
+			  <div>
+				<a href="https://github.com/kangkanglang/kangkanglang.github.io/edit/hexoBlog/source/_posts/快速排序.md" target="_blank"><font color="green"> ## Edit This Blog ## </font></a>
+			  </div>
+			  
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/31/%E5%A0%86%E6%8E%92%E5%BA%8F/">
+                        <span class="hidden-mobile">排序算法之堆排序</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+
+              </article>
+            
+			  
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
