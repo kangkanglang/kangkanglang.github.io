@@ -9,7 +9,7 @@ tags:
   - 'Java'
 ---
 
-SpringBoot 、Mybatis 与 websocket 之间的一些问题，欢迎交流，指证错误。
+SpringBoot 、Mybatis 与 websocket 之间的一些问题，欢迎交流，指正错误。
 
 <!-- more -->
 
