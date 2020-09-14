@@ -17,7 +17,7 @@
   <meta name="description" content="这是我的个人博客！">
   <meta name="author" content="Harrison">
   <meta name="keywords" content="">
-  <title>排序算法之快速排序 | Harrison</title>
+  <title>并查集 | Harrison</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -154,7 +154,7 @@
           <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
-                排序算法之快速排序
+                并查集
               
             </span>
 
@@ -162,8 +162,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-31 22:56" pubdate>
-      2020年8月31日 晚上
+    <time datetime="2020-09-14 12:02" pubdate>
+      2020年9月14日 中午
     </time>
   </div>
 
@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      844 字
+      973 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      12
        分钟
     </span>
   
@@ -213,108 +213,140 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">排序算法之快速排序</h1>
+            <h1 style="display: none">并查集</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>快速排序算法实现，欢迎交流，指正错误。</p>
+              <p>并查集知识小结，欢迎交流，指正错误。</p>
 <a id="more"></a>
 
-<h3 id="1-快速排序"><a href="#1-快速排序" class="headerlink" title="1. 快速排序"></a>1. 快速排序</h3><p>快速排序（Quicksort）是对冒泡排序的一种改进。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以<a href="https://baike.baidu.com/item/递归/1740695" target="_blank" rel="noopener">递归</a>进行，以此达到整个数据变成有序<a href="https://baike.baidu.com/item/序列/1302588" target="_blank" rel="noopener">序列</a>。</p>
-<p>采用了分治的思想：</p>
-<blockquote>
-<p>该方法的基本思想是：</p>
-<ul>
-<li>先从数列中取出一个数作为基准数。</li>
-<li>分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</li>
-<li>再对左右区间重复第二步，直到各区间只有一个数。  </li>
-</ul>
-</blockquote>
-<h4 id="1-1-复杂度分析"><a href="#1-1-复杂度分析" class="headerlink" title="1.1. 复杂度分析"></a>1.1. 复杂度分析</h4><blockquote>
-<ul>
-<li>时间复杂度（平均）：O(nlogn)</li>
-<li>时间复杂度（最坏）：O(n^2)   （退化为冒泡排序）</li>
-<li>时间复杂度（最好）：O(nlogn)</li>
-<li>空间复杂度：O(nlogn)</li>
-<li>稳定性：不稳定</li>
-</ul>
-</blockquote>
-<h3 id="2-快速排序实现"><a href="#2-快速排序实现" class="headerlink" title="2. 快速排序实现"></a>2. 快速排序实现</h3><pre><code class="hljs java"><span class="hljs-comment">/**</span>
-<span class="hljs-comment"> * 快速排序的实现</span>
-<span class="hljs-comment"> */</span>
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr)</span> </span>&#123;
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> == arr || <span class="hljs-number">1</span> &gt;= arr.length) &#123; <span class="hljs-keyword">return</span>; &#125;
 
-    quickSort(arr, <span class="hljs-number">0</span>, arr.length - <span class="hljs-number">1</span>);
-&#125;
 
-<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span></span>&#123;
-    <span class="hljs-keyword">if</span> (start &gt;= end) &#123; <span class="hljs-keyword">return</span>; &#125;
-	<span class="hljs-comment">// 寻找左右划分的边界</span>
-    <span class="hljs-keyword">int</span> boundary = findBoundary(arr, start, end);
-	<span class="hljs-comment">// 左边使用快排</span>
-    quickSort(arr, start, boundary - <span class="hljs-number">1</span>);
-    <span class="hljs-comment">// 右边使用快排</span>
-    quickSort(arr, boundary + <span class="hljs-number">1</span>, end);
-&#125;
+<h3 id="1-并查集"><a href="#1-并查集" class="headerlink" title="1. 并查集"></a>1. 并查集</h3><p>并查集（Union-Find Sets）是一种非常精巧而实用的数据结构，只有<strong>合并</strong>和<strong>查找</strong>操作的数据结构，它主要用于处理一些<strong>不相交集合</strong>的合并问题。</p>
+<p>可以查看该<a href="https://blog.csdn.net/qq_41593380/article/details/81146850" target="_blank" rel="noopener">博客</a>对并查集有个了解和认识，本人觉得该博客讲的还是不错的。</p>
+<h3 id="2-并查集的实现"><a href="#2-并查集的实现" class="headerlink" title="2. 并查集的实现"></a>2. 并查集的实现</h3><p>Java代码实现如下：</p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind</span> </span>&#123;
 
-<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findBoundary</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span></span>&#123;
-    <span class="hljs-keyword">int</span> pivot = arr[start]; <span class="hljs-comment">// 以第一个元素作为基准</span>
-   
-    <span class="hljs-keyword">while</span> (l &lt; r)&#123;
-        <span class="hljs-comment">// 最右边开始找， 找到第一个比pivot小的数</span>
-        <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; pivot &lt;= arr[r]) &#123; r--; &#125;
-        arr[l] = arr[r];
-        <span class="hljs-comment">// 最左边开始找，找到以一个比pivot大的数</span>
-        <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; arr[l] &lt;= pivot) &#123; l++; &#125;
-        arr[r] = arr[l];
-    &#125;
-    arr[l] = pivot;
-    <span class="hljs-comment">// 返回边界值</span>
-    <span class="hljs-keyword">return</span> l;
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] record; <span class="hljs-comment">// 记录每个元素的上一级是谁</span>
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> count; <span class="hljs-comment">//剩余集合数目</span>
+		
+    	<span class="hljs-comment">// 初始化record[], 让每一个元素在最初始时的上一级是自己</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
+            record = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; n;i++) &#123;
+                record[i] = i;
+            &#125;
+            count = n;
+        &#125;
+
+    	<span class="hljs-comment">// 寻找 p 元素所在集合的"根元素"</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span> </span>&#123;
+            <span class="hljs-comment">// 路径压缩</span>
+            <span class="hljs-keyword">if</span> (p != record[p]) record[p] = find(record[p]);
+            <span class="hljs-keyword">return</span> record[p];
+        &#125;
+
+    	<span class="hljs-comment">// 合并 p 元素和 q 元素所在的集合</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span> </span>&#123;
+            <span class="hljs-keyword">int</span> pid = find(p);
+            <span class="hljs-keyword">int</span> qid = find(q);
+            <span class="hljs-keyword">if</span> (pid == qid) <span class="hljs-keyword">return</span>;
+            <span class="hljs-comment">// 合并</span>
+            record[pid] = qid;
+            count--;
+        &#125;
+
+    	<span class="hljs-comment">// 返回当前剩余的集合数</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">count</span><span class="hljs-params">()</span> </span>&#123;
+            <span class="hljs-keyword">return</span> count;
+        &#125;
 &#125;</code></pre>
 
 
 
-<h3 id="3-快速排序的应用"><a href="#3-快速排序的应用" class="headerlink" title="3. 快速排序的应用"></a>3. 快速排序的应用</h3><p>题目：</p>
+<h3 id="3-并查集的应用"><a href="#3-并查集的应用" class="headerlink" title="3. 并查集的应用"></a>3. 并查集的应用</h3><p>题目描述：</p>
 <blockquote>
-<p>有一个整数数组，请你根据<strong>快速排序</strong>的思路，找出数组中第K大的数。</p>
-<p>给定一个整数数组a,同时给定它的大小n和要找的K(K在1到n之间)，请返回第K大的数，保证答案存在。</p>
+<p>某一群岛由 n 个小岛组成，为了加强小岛居民之间的交流，首领决定启动一个造桥工程，将全部 n 个小岛连接到一起。</p>
+<p>由于受到经融危机的影响，头目要求造桥的总成本要最少，并且规定每一座桥的成本都不能超过 k 万金币。</p>
+<p>需要注意的是，由于受到地理环境和气候影响，有些小岛之间没办法直接造桥。</p>
+<p>现给定 m 条小岛之间的造桥成本数据以及 k  的值，请问该工程是否能够顺利完成？</p>
+<p>注意：可能桥的数量不够，也可能费用超支。</p>
 </blockquote>
-<p>思路：</p>
-<p>一般top K问题适合用堆排序解决，但此处要求使用快速排序的思路解决。</p>
-<p>我们知道快速排序每经历一次排序后（降序排序），<code>pivot</code>所处的位置是固定的，因为<code>pivot</code>前面的数都不小于它，而<code>pivot</code>后面的数都不大于它，因此经过K次排序后的结果即为第K大。</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findKth</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> K)</span> </span>&#123;
-    <span class="hljs-comment">// write code here</span>
-    <span class="hljs-keyword">if</span>(a == <span class="hljs-keyword">null</span> || a.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
-    <span class="hljs-keyword">return</span> quickSort(K, a, <span class="hljs-number">0</span>, n-<span class="hljs-number">1</span>);
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> K, <span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span></span>&#123;
-	<span class="hljs-comment">// 寻找边界</span>
-    <span class="hljs-keyword">int</span> boundary = findBoundary(a, start, end);
-    <span class="hljs-comment">// 边界值 + 1 == K，找到第K大的数</span>
-    <span class="hljs-keyword">if</span>(boundary + <span class="hljs-number">1</span> == K)
-        <span class="hljs-keyword">return</span> a[boundary];
-    <span class="hljs-comment">// 边界值 + 1 &lt; K，应在右半部分找第K大的数</span>
-    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(boundary + <span class="hljs-number">1</span> &lt; K)
-        <span class="hljs-keyword">return</span> quickSort(K, a, boundary + <span class="hljs-number">1</span>, end);
-    <span class="hljs-comment">// 边界值 + 1 &gt; K，应在左半部分找第K大的数</span>
-    <span class="hljs-keyword">else</span> 
-        <span class="hljs-keyword">return</span> quickSort(K, a, start, boundary - <span class="hljs-number">1</span>);
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findBoundary</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span></span>&#123;
-    <span class="hljs-keyword">int</span> pivot = a[start];
-    <span class="hljs-keyword">while</span>(start &lt; end)&#123;
-        <span class="hljs-keyword">while</span>(start &lt; end &amp;&amp; a[end] &lt;= pivot) end--;
-        a[start] = a[end];
-        <span class="hljs-keyword">while</span>(start &lt; end &amp;&amp; a[start] &gt;= pivot) start++;
-        a[end] = a[start];
+<p>输入描述：</p>
+<blockquote>
+<p>多组输入，第一行输入一个正整数 T 表示输入数据的组数。</p>
+<p>对于每一组输入数据：输入 m+1 行。</p>
+<p>第一行包含3个正整数，分别表示 n、m 和 k ，n &lt;= 100, m &lt;= 1000, k &lt;= 10000 ，数字之间用空格隔开。</p>
+<p>接下来 m 行表示 m 条小岛之间的造桥成本数据，每一行包含3个正整数，分别表示两个小岛的编号（从1开始）和造桥的成本（单位：万）。</p>
+</blockquote>
+<p>输出描述：</p>
+<blockquote>
+<p>针对每一组输入数据，如果工程能够完成输出“YES”，否则输出“NO”。</p>
+</blockquote>
+<p>基本思路：</p>
+<blockquote>
+<p>可以认为能够成功造桥的两个岛之间属于同一个岛屿，即将这两个岛合并（union）到一个岛屿中。最后如果剩余的岛屿数量为 1 则表示将所有岛都成功连在一起，即该工程成功；否则工程失败。</p>
+</blockquote>
+<p>实现代码：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span></span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        Scanner scanner = <span class="hljs-keyword">new</span> Scanner(System.in);
+        <span class="hljs-keyword">int</span> T = scanner.nextInt();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; T; i++) &#123;
+            <span class="hljs-keyword">int</span> n = scanner.nextInt();
+            <span class="hljs-keyword">int</span> m = scanner.nextInt();
+            <span class="hljs-keyword">int</span> k = scanner.nextInt();
+            UnionFind unionFind = <span class="hljs-keyword">new</span> UnionFind(n);
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; j++) &#123;
+                <span class="hljs-keyword">int</span> p = scanner.nextInt();
+                <span class="hljs-keyword">int</span> q = scanner.nextInt();
+                <span class="hljs-keyword">int</span> cost = scanner.nextInt();
+                <span class="hljs-keyword">if</span> (cost &lt;= k) &#123;
+                    unionFind.union(p, q);
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span> (unionFind.count() == <span class="hljs-number">1</span>) &#123;
+                System.out.println(<span class="hljs-string">"YES"</span>);
+            &#125;<span class="hljs-keyword">else</span> &#123;
+                System.out.println(<span class="hljs-string">"NO"</span>);
+            &#125;
+        &#125;
     &#125;
-    a[start] = pivot;
-    <span class="hljs-keyword">return</span> start;
+&#125;
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind</span> </span>&#123;
+
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] record; <span class="hljs-comment">// 记录每个元素的上一级是谁</span>
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> count; <span class="hljs-comment">// 岛屿的数量，</span>
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
+            record = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n+<span class="hljs-number">1</span>];
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt;= n;i++) &#123;
+                record[i] = i;
+            &#125;
+            count = n;
+        &#125;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span> </span>&#123;
+            <span class="hljs-comment">// 路径压缩</span>
+            <span class="hljs-keyword">if</span> (p != record[p]) record[p] = find(record[p]);
+            <span class="hljs-keyword">return</span> record[p];
+        &#125;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span> </span>&#123;
+            <span class="hljs-keyword">int</span> pid = find(p);
+            <span class="hljs-keyword">int</span> qid = find(q);
+            <span class="hljs-keyword">if</span> (pid == qid) <span class="hljs-keyword">return</span>;
+            <span class="hljs-comment">// 合并</span>
+            record[pid] = qid;
+            count--;
+        &#125;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">count</span><span class="hljs-params">()</span> </span>&#123;
+            <span class="hljs-keyword">return</span> count;
+        &#125;
+    &#125;
 &#125;</code></pre>
 
+<p><strong>PS：当然该题也可以通过构造图的方法来解，最后用DFS来确认连通图的数量，为 1 表示成功；否则表示失败。</strong></p>
 
             </div>
             <hr>
@@ -324,7 +356,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Java-learning/">Java learning</a>
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
                     
                   </div>
                 
@@ -332,15 +364,13 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Sort/">Sort</a>
+                      <a class="hover-with-bg" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a>
                     
                   </div>
                 
               </div>
 			  <div>
-				<a href="https://github.com/kangkanglang/kangkanglang.github.io/edit/hexoBlog/source/_posts/快速排序.md" target="_blank"><font color="green"> ## Edit This Blog ## </font></a>
+				<a href="https://github.com/kangkanglang/kangkanglang.github.io/edit/hexoBlog/source/_posts/并查集.md" target="_blank"><font color="green"> ## Edit This Blog ## </font></a>
 			  </div>
 			  
               
@@ -351,18 +381,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/14/%E5%B9%B6%E6%9F%A5%E9%9B%86/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">并查集</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/31/%E5%A0%86%E6%8E%92%E5%BA%8F/">
-                        <span class="hidden-mobile">排序算法之堆排序</span>
+                      <a href="/2020/08/31/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+                        <span class="hidden-mobile">排序算法之快速排序</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
