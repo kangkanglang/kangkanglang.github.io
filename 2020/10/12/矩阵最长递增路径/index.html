@@ -17,7 +17,7 @@
   <meta name="description" content="这是我的个人博客！">
   <meta name="author" content="Harrison">
   <meta name="keywords" content="">
-  <title>并查集 | Harrison</title>
+  <title>矩阵中的最长递增路径 | Harrison</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -154,7 +154,7 @@
           <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
-                并查集
+                矩阵中的最长递增路径
               
             </span>
 
@@ -162,8 +162,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-09-14 12:02" pubdate>
-      2020年9月14日 中午
+    <time datetime="2020-10-12 16:05" pubdate>
+      2020年10月12日 下午
     </time>
   </div>
 
@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      989 字
+      601 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      8
        分钟
     </span>
   
@@ -213,141 +213,72 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">并查集</h1>
+            <h1 style="display: none">矩阵中的最长递增路径</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>并查集知识小结，欢迎交流，指正错误。</p>
+              <p>记录Leetcode上的一道题目，欢迎交流，指正错误。</p>
 <a id="more"></a>
 
-
-
-<h3 id="1-并查集"><a href="#1-并查集" class="headerlink" title="1. 并查集"></a>1. 并查集</h3><p>并查集（Union-Find Sets）是一种非常精巧而实用的数据结构，只有<strong>合并</strong>和<strong>查找</strong>操作的数据结构，它主要用于处理一些<strong>不相交集合</strong>的合并问题。</p>
-<p>可以查看该<a href="https://blog.csdn.net/qq_41593380/article/details/81146850" target="_blank" rel="noopener">博客</a>对并查集有个了解和认识，本人觉得该博客讲的还是不错的。</p>
-<h3 id="2-并查集的实现"><a href="#2-并查集的实现" class="headerlink" title="2. 并查集的实现"></a>2. 并查集的实现</h3><p>Java代码实现如下：</p>
-<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind</span> </span>&#123;
-
-        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] record; <span class="hljs-comment">// 记录每个元素的上一级是谁</span>
-        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> count; <span class="hljs-comment">//剩余集合数目</span>
-		
-    	<span class="hljs-comment">// 初始化record[], 让每一个元素在最初始时的上一级是自己</span>
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
-            record = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
-            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; n;i++) &#123;
-                record[i] = i;
-            &#125;
-            count = n;
-        &#125;
-
-    	<span class="hljs-comment">// 寻找 p 元素所在集合的"根元素"</span>
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span> </span>&#123;
-            <span class="hljs-comment">// 路径压缩</span>
-            <span class="hljs-keyword">if</span> (p != record[p]) record[p] = find(record[p]);
-            <span class="hljs-keyword">return</span> record[p];
-        &#125;
-
-    	<span class="hljs-comment">// 合并 p 元素和 q 元素所在的集合</span>
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span> </span>&#123;
-            <span class="hljs-keyword">int</span> pid = find(p);
-            <span class="hljs-keyword">int</span> qid = find(q);
-            <span class="hljs-keyword">if</span> (pid == qid) <span class="hljs-keyword">return</span>;
-            <span class="hljs-comment">// 合并</span>
-            record[pid] = qid;
-            count--;
-        &#125;
-
-    	<span class="hljs-comment">// 返回当前剩余的集合数</span>
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">count</span><span class="hljs-params">()</span> </span>&#123;
-            <span class="hljs-keyword">return</span> count;
-        &#125;
-&#125;</code></pre>
-
-
-
-<h3 id="3-并查集的应用"><a href="#3-并查集的应用" class="headerlink" title="3. 并查集的应用"></a>3. 并查集的应用</h3><p>题目描述：</p>
+<h3 id="1-矩阵中的最长递增路径"><a href="#1-矩阵中的最长递增路径" class="headerlink" title="1. 矩阵中的最长递增路径"></a>1. 矩阵中的最长递增路径</h3><p><a href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/" target="_blank" rel="noopener">LeetCode链接</a></p>
+<p><strong>题目：</strong></p>
+<p>给定一个整数矩阵，找出最长递增路径的长度。</p>
+<p>对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。</p>
+<p><strong>示例 1：</strong></p>
 <blockquote>
-<p>某一群岛由 n 个小岛组成，为了加强小岛居民之间的交流，首领决定启动一个造桥工程，将全部 n 个小岛连接到一起。</p>
-<p>由于受到经融危机的影响，头目要求造桥的总成本要最少，并且规定每一座桥的成本都不能超过 k 万金币。</p>
-<p>需要注意的是，由于受到地理环境和气候影响，有些小岛之间没办法直接造桥。</p>
-<p>现给定 m 条小岛之间的造桥成本数据以及 k  的值，请问该工程是否能够顺利完成？</p>
-<p>注意：可能桥的数量不够，也可能费用超支。</p>
+<p>输入: nums =<br>[<br>  [9,9,4],<br>  [6,6,8],<br>  [2,1,1]<br>]<br>输出: 4<br>解释: 最长递增路径为 [1, 2, 6, 9]。</p>
 </blockquote>
-<p>输入描述：</p>
+<p><strong>示例 2：</strong></p>
 <blockquote>
-<p>多组输入，第一行输入一个正整数 T 表示输入数据的组数。</p>
-<p>对于每一组输入数据：输入 m+1 行。</p>
-<p>第一行包含3个正整数，分别表示 n、m 和 k ，n &lt;= 100, m &lt;= 1000, k &lt;= 10000 ，数字之间用空格隔开。</p>
-<p>接下来 m 行表示 m 条小岛之间的造桥成本数据，每一行包含3个正整数，分别表示两个小岛的编号（从1开始）和造桥的成本（单位：万）。</p>
+<p> 输入: nums =<br> [<br>   [3,4,5],<br>   [3,2,6],<br>   [2,2,1]<br> ]<br> 输出: 4<br> 解释: 最长递增路径是 [3, 4, 5, 6]。注意不允许在对角线方向上移动。</p>
 </blockquote>
-<p>输出描述：</p>
-<blockquote>
-<p>针对每一组输入数据，如果工程能够完成输出“YES”，否则输出“NO”。</p>
-</blockquote>
-<p>基本思路：</p>
-<blockquote>
-<p>可以认为能够成功造桥的两个岛之间属于同一个岛屿，即将这两个岛合并（union）到一个岛屿中。最后如果剩余的岛屿数量为 1 则表示将所有岛都成功连在一起，即该工程成功；否则工程失败。</p>
-</blockquote>
-<p>实现代码：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span></span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        Scanner scanner = <span class="hljs-keyword">new</span> Scanner(System.in);
-        <span class="hljs-keyword">int</span> T = scanner.nextInt();
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; T; i++) &#123;
-            <span class="hljs-keyword">int</span> n = scanner.nextInt();
-            <span class="hljs-keyword">int</span> m = scanner.nextInt();
-            <span class="hljs-keyword">int</span> k = scanner.nextInt();
-            UnionFind unionFind = <span class="hljs-keyword">new</span> UnionFind(n);
-            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; j++) &#123;
-                <span class="hljs-keyword">int</span> p = scanner.nextInt();
-                <span class="hljs-keyword">int</span> q = scanner.nextInt();
-                <span class="hljs-keyword">int</span> cost = scanner.nextInt();
-                <span class="hljs-keyword">if</span> (cost &lt;= k) &#123;
-                    unionFind.union(p, q);
-                &#125;
-            &#125;
-            <span class="hljs-keyword">if</span> (unionFind.count() == <span class="hljs-number">1</span>) &#123;
-                System.out.println(<span class="hljs-string">"YES"</span>);
-            &#125;<span class="hljs-keyword">else</span> &#123;
-                System.out.println(<span class="hljs-string">"NO"</span>);
+<p><strong>解题思路：</strong></p>
+<p>最基本思路就是遍历matrix中的每一个元素，然后以该元素出发，往上、下、左、右四个方向移动，并统计出最长路径的长度，最后返回所有元素中最长的路径长度。如果这样操作的话，对于同一个元素可能会多次访问，时长会太长，因此通过一个max数组来剪枝。</p>
+<p>max数组用来保存以 i , j 出发能拿到的最长路径数，对于<code>max[i][j]</code>不为0的元素表示已经统计过，不需要再次访问，即剪枝。</p>
+<p><strong>代码：</strong></p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+
+    <span class="hljs-keyword">int</span>[][] max; <span class="hljs-comment">// 保存以 i , j 出发能拿到的最大路径数</span>
+    <span class="hljs-keyword">int</span> row, col; <span class="hljs-comment">// matrix的行和列</span>
+    <span class="hljs-keyword">int</span>[][] dirs = &#123;&#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;&#125;; <span class="hljs-comment">// 方向数组</span>
+
+    <span class="hljs-comment">// 返回matrix中最长递增路径</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">longestIncreasingPath</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] matrix)</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(matrix == <span class="hljs-keyword">null</span> || (row = matrix.length) == <span class="hljs-number">0</span> || (col = matrix[<span class="hljs-number">0</span>].length) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;
+        max = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[row][col];
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; row; i++)&#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; col; j++) &#123;
+                <span class="hljs-keyword">if</span>(max[i][j] == <span class="hljs-number">0</span>)
+                    res = Math.max(DFS(matrix, i, j), res);
             &#125;
         &#125;
+        <span class="hljs-keyword">return</span> res;
     &#125;
-&#125;
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind</span> </span>&#123;
 
-        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] record; <span class="hljs-comment">// 记录每个元素的上一级是谁</span>
-        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> count; <span class="hljs-comment">// 岛屿的数量，</span>
-
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
-            record = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n+<span class="hljs-number">1</span>];
-            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt;= n;i++) &#123;
-                record[i] = i;
+   <span class="hljs-comment">//返回以curRow, curCol出发(包含)能拿到的最大路径数</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">DFS</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] matrix, <span class="hljs-keyword">int</span> curRow, <span class="hljs-keyword">int</span> curCol)</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(max[curRow][curCol] != <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">return</span> max[curRow][curCol];
+        max[curRow][curCol] = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>[] dir : dirs) &#123;
+            <span class="hljs-keyword">int</span> nextRow = curRow + dir[<span class="hljs-number">0</span>];
+            <span class="hljs-keyword">int</span> nextCol = curCol + dir[<span class="hljs-number">1</span>];
+            <span class="hljs-keyword">if</span>(isRange(nextRow,nextCol) &amp;&amp; matrix[nextRow][nextCol] &gt; matrix[curRow][curCol])&#123;
+                max[curRow][curCol] = Math.max(max[curRow][curCol], DFS(matrix, nextRow, nextCol) + <span class="hljs-number">1</span>);
             &#125;
-            count = n;
         &#125;
+        <span class="hljs-keyword">return</span> max[curRow][curCol];
+    &#125;
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span> </span>&#123;
-            <span class="hljs-comment">// 路径压缩</span>
-            <span class="hljs-keyword">if</span> (p != record[p]) record[p] = find(record[p]);
-            <span class="hljs-keyword">return</span> record[p];
-        &#125;
-
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span> </span>&#123;
-            <span class="hljs-keyword">int</span> pid = find(p);
-            <span class="hljs-keyword">int</span> qid = find(q);
-            <span class="hljs-keyword">if</span> (pid == qid) <span class="hljs-keyword">return</span>;
-            <span class="hljs-comment">// 合并</span>
-            record[pid] = qid;
-            count--;
-        &#125;
-
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">count</span><span class="hljs-params">()</span> </span>&#123;
-            <span class="hljs-keyword">return</span> count;
-        &#125;
+    <span class="hljs-comment">//校验curRow, curCol是否在matrix边界内</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isRange</span><span class="hljs-params">(<span class="hljs-keyword">int</span> curRow, <span class="hljs-keyword">int</span> curCol)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> curRow &gt;= <span class="hljs-number">0</span> &amp;&amp; curCol &gt;= <span class="hljs-number">0</span> &amp;&amp; curRow &lt; row &amp;&amp; curCol &lt; col;
     &#125;
 &#125;</code></pre>
 
-<p><strong>PS：当然该题也可以通过构造图的方法来解，最后用DFS来确认连通图的数量，为 1 表示成功；否则表示失败。</strong></p>
-<h3 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h3><p>其他并查集的应用，<a href="https://leetcode-cn.com/problems/friend-circles/" target="_blank" rel="noopener">LeetCode 547. 朋友圈</a> 。</p>
+
+
+<h3 id="2-小结"><a href="#2-小结" class="headerlink" title="2. 小结"></a>2. 小结</h3><p>这是对DFS方法很好的运用。</p>
 
             </div>
             <hr>
@@ -365,13 +296,13 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a>
+                      <a class="hover-with-bg" href="/tags/LeetCode/">LeetCode</a>
                     
                   </div>
                 
               </div>
 			  <div>
-				<a href="https://github.com/kangkanglang/kangkanglang.github.io/edit/hexoBlog/source/_posts/并查集.md" target="_blank"><font color="green"> ## Edit This Blog ## </font></a>
+				<a href="https://github.com/kangkanglang/kangkanglang.github.io/edit/hexoBlog/source/_posts/矩阵最长递增路径.md" target="_blank"><font color="green"> ## Edit This Blog ## </font></a>
 			  </div>
 			  
               
@@ -382,18 +313,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/10/12/%E7%9F%A9%E9%98%B5%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E8%B7%AF%E5%BE%84/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">矩阵中的最长递增路径</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/31/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
-                        <span class="hidden-mobile">排序算法之快速排序</span>
+                      <a href="/2020/09/14/%E5%B9%B6%E6%9F%A5%E9%9B%86/">
+                        <span class="hidden-mobile">并查集</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

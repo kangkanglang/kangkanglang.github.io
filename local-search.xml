@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>矩阵中的最长递增路径</title>
+    <link href="/2020/10/12/%E7%9F%A9%E9%98%B5%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E8%B7%AF%E5%BE%84/"/>
+    <url>/2020/10/12/%E7%9F%A9%E9%98%B5%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E8%B7%AF%E5%BE%84/</url>
+    
+    <content type="html"><![CDATA[<p>记录Leetcode上的一道题目，欢迎交流，指正错误。</p><a id="more"></a><h3 id="1-矩阵中的最长递增路径"><a href="#1-矩阵中的最长递增路径" class="headerlink" title="1. 矩阵中的最长递增路径"></a>1. 矩阵中的最长递增路径</h3><p><a href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/" target="_blank" rel="noopener">LeetCode链接</a></p><p><strong>题目：</strong></p><p>给定一个整数矩阵，找出最长递增路径的长度。</p><p>对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。</p><p><strong>示例 1：</strong></p><blockquote><p>输入: nums =<br>[<br>  [9,9,4],<br>  [6,6,8],<br>  [2,1,1]<br>]<br>输出: 4<br>解释: 最长递增路径为 [1, 2, 6, 9]。</p></blockquote><p><strong>示例 2：</strong></p><blockquote><p> 输入: nums =<br> [<br>   [3,4,5],<br>   [3,2,6],<br>   [2,2,1]<br> ]<br> 输出: 4<br> 解释: 最长递增路径是 [3, 4, 5, 6]。注意不允许在对角线方向上移动。</p></blockquote><p><strong>解题思路：</strong></p><p>最基本思路就是遍历matrix中的每一个元素，然后以该元素出发，往上、下、左、右四个方向移动，并统计出最长路径的长度，最后返回所有元素中最长的路径长度。如果这样操作的话，对于同一个元素可能会多次访问，时长会太长，因此通过一个max数组来剪枝。</p><p>max数组用来保存以 i , j 出发能拿到的最长路径数，对于<code>max[i][j]</code>不为0的元素表示已经统计过，不需要再次访问，即剪枝。</p><p><strong>代码：</strong></p><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-keyword">int</span>[][] max; <span class="hljs-comment">// 保存以 i , j 出发能拿到的最大路径数</span>    <span class="hljs-keyword">int</span> row, col; <span class="hljs-comment">// matrix的行和列</span>    <span class="hljs-keyword">int</span>[][] dirs = &#123;&#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;&#125;; <span class="hljs-comment">// 方向数组</span>    <span class="hljs-comment">// 返回matrix中最长递增路径</span>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">longestIncreasingPath</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] matrix)</span> </span>&#123;        <span class="hljs-keyword">if</span>(matrix == <span class="hljs-keyword">null</span> || (row = matrix.length) == <span class="hljs-number">0</span> || (col = matrix[<span class="hljs-number">0</span>].length) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;        <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;        max = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[row][col];        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; row; i++)&#123;            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; col; j++) &#123;                <span class="hljs-keyword">if</span>(max[i][j] == <span class="hljs-number">0</span>)                    res = Math.max(DFS(matrix, i, j), res);            &#125;        &#125;        <span class="hljs-keyword">return</span> res;    &#125;   <span class="hljs-comment">//返回以curRow, curCol出发(包含)能拿到的最大路径数</span>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">DFS</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] matrix, <span class="hljs-keyword">int</span> curRow, <span class="hljs-keyword">int</span> curCol)</span> </span>&#123;        <span class="hljs-keyword">if</span>(max[curRow][curCol] != <span class="hljs-number">0</span>)            <span class="hljs-keyword">return</span> max[curRow][curCol];        max[curRow][curCol] = <span class="hljs-number">1</span>;        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>[] dir : dirs) &#123;            <span class="hljs-keyword">int</span> nextRow = curRow + dir[<span class="hljs-number">0</span>];            <span class="hljs-keyword">int</span> nextCol = curCol + dir[<span class="hljs-number">1</span>];            <span class="hljs-keyword">if</span>(isRange(nextRow,nextCol) &amp;&amp; matrix[nextRow][nextCol] &gt; matrix[curRow][curCol])&#123;                max[curRow][curCol] = Math.max(max[curRow][curCol], DFS(matrix, nextRow, nextCol) + <span class="hljs-number">1</span>);            &#125;        &#125;        <span class="hljs-keyword">return</span> max[curRow][curCol];    &#125;    <span class="hljs-comment">//校验curRow, curCol是否在matrix边界内</span>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isRange</span><span class="hljs-params">(<span class="hljs-keyword">int</span> curRow, <span class="hljs-keyword">int</span> curCol)</span> </span>&#123;        <span class="hljs-keyword">return</span> curRow &gt;= <span class="hljs-number">0</span> &amp;&amp; curCol &gt;= <span class="hljs-number">0</span> &amp;&amp; curRow &lt; row &amp;&amp; curCol &lt; col;    &#125;&#125;</code></pre><h3 id="2-小结"><a href="#2-小结" class="headerlink" title="2. 小结"></a>2. 小结</h3><p>这是对DFS方法很好的运用。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>LeetCode</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>并查集</title>
     <link href="/2020/09/14/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
     <url>/2020/09/14/%E5%B9%B6%E6%9F%A5%E9%9B%86/</url>
