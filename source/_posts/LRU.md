@@ -35,8 +35,6 @@ import java.util.Map;
  */
 public class LRUCache {
 
-    private static Deque<Node> queue = new LinkedList<Node>();
-
     private static class Node{
         int key;
         int value;
